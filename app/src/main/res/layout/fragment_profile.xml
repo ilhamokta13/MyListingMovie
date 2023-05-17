@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--suppress ALL -->
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -50,6 +51,7 @@
                 android:drawableEnd="@drawable/ic_baseline_account_circle_24"
                 android:inputType="textPersonName"
                 android:maxLines="1"
+                android:text="Welcome, Username"
                 android:singleLine="true"
                 android:textColor="@android:color/black" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -77,6 +79,7 @@
                 android:layout_height="wrap_content"
                 android:drawableEnd="@drawable/ic_baseline_account_box_24"
                 android:inputType="textEmailAddress"
+                android:text="Nama Lengkap"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:textColor="@android:color/black" />
@@ -105,6 +108,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
+                android:text="Tanggal Lahir"
                 android:singleLine="true"
                 android:drawableEnd="@drawable/ic_baseline_date_range_24"
                 android:textColor="@android:color/black" />
@@ -131,6 +135,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
+                android:text="Alamat"
                 android:drawableEnd="@drawable/ic_baseline_add_location_24"
                 android:maxLines="1"
                 android:singleLine="true"

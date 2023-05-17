@@ -1,3 +1,7 @@
+@file:Suppress("RedundantNullableReturnType", "UnusedImport", "UnusedImport", "UnusedImport",
+    "UnusedImport", "UnusedImport", "UnusedImport"
+)
+
 package com.example.mylistingmovie.view
 
 import android.content.Context
@@ -11,15 +15,18 @@ import android.widget.Toast
 import androidx.navigation.Navigation
 import com.example.mylistingmovie.R
 import com.example.mylistingmovie.databinding.FragmentProfileBinding
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
+import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
-
-class ProfileFragment : Fragment() {
+@AndroidEntryPoint
+open class ProfileFragment : Fragment() {
 
     lateinit var binding: FragmentProfileBinding
-    lateinit var pref: SharedPreferences
+//    private lateinit var uservm: UserViewModel
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var pref : SharedPreferences
+
+
 
 
     override fun onCreateView(
@@ -33,7 +40,14 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//        uservm = ViewModelProvider(this).get(UserViewModel::class.java)
+
+        firebaseAuth = FirebaseAuth.getInstance()
         pref = requireActivity().getSharedPreferences("Regist", Context.MODE_PRIVATE)
+
+//        setField(firebaseAuth.currentUser?.email!!)
+
+
 
         binding.btnUpdate.setOnClickListener {
             val username = binding.usernameUpText.text.toString()
@@ -41,14 +55,34 @@ class ProfileFragment : Fragment() {
             val ttl = binding.tanggalUpText.text.toString()
             val alamat = binding.alamatUpText.text.toString()
 
-            var adduser = pref.edit()
+
+            val adduser = pref.edit()
             adduser.putString("username", username)
             adduser.putString("nama", nama)
             adduser.putString("ttl", ttl)
             adduser.putString("alamat", alamat)
             adduser.apply()
+            firebaseAuth = FirebaseAuth.getInstance()
+            firebaseAuth.signOut()
             Toast.makeText(context, "Done Update", Toast.LENGTH_SHORT).show()
             Navigation.findNavController(binding.root).navigate(R.id.action_profileFragment_to_homeFragment)
+//            GlobalScope.async {
+//                uservm.updateDataUser(
+//                    User(
+//                    id,
+//                    firebaseAuth.currentUser!!.email.toString(),
+//                    username,
+//                    nama,
+//                    ttl,
+//                    alamat
+//                )
+//                )
+//
+//                uservm.getDataUser(firebaseAuth.currentUser!!.email.toString())
+//            }
+//            findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
+//
+//
         }
 
 
@@ -63,4 +97,6 @@ class ProfileFragment : Fragment() {
 
 
     }
+
+
 }

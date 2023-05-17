@@ -11,12 +11,13 @@
         <entry key="..\:/KULIAH/MyListingMovie/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
         <entry key="..\:/KULIAH/MyListingMovie/app/src/main/res/layout/fragment_detail.xml" value="0.22" />
         <entry key="..\:/KULIAH/MyListingMovie/app/src/main/res/layout/fragment_favorite.xml" value="0.22" />
-        <entry key="..\:/KULIAH/MyListingMovie/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/KULIAH/MyListingMovie/app/src/main/res/layout/fragment_home.xml" value="0.2132701421800948" />
         <entry key="..\:/KULIAH/MyListingMovie/app/src/main/res/layout/fragment_login.xml" value="0.16666666666666666" />
         <entry key="..\:/KULIAH/MyListingMovie/app/src/main/res/layout/fragment_profile.xml" value="0.16666666666666666" />
         <entry key="..\:/KULIAH/MyListingMovie/app/src/main/res/layout/fragment_register.xml" value="0.22" />
         <entry key="..\:/KULIAH/MyListingMovie/app/src/main/res/layout/item_movie.xml" value="0.22" />
         <entry key="..\:/KULIAH/MyListingMovie/app/src/main/res/layout/item_moviefav.xml" value="0.13858695652173914" />
+        <entry key="..\:/KULIAH/MyListingMovie/app/src/main/res/layout/item_ze.xml" value="0.14666666666666667" />
         <entry key="..\:/KULIAH/MyListingMovie/app/src/main/res/layout/profile_layout.xml" value="0.14130434782608695" />
       </map>
     </option>

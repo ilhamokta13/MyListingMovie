@@ -1,3 +1,5 @@
+@file:Suppress("UnusedImport")
+
 package com.example.mylistingmovie.model
 
 import android.os.Parcelable

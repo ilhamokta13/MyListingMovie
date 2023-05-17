@@ -1,3 +1,5 @@
+@file:Suppress("FunctionName", "unused")
+
 package com.example.mylistingmovie.database
 
 import android.content.Context
@@ -8,7 +10,7 @@ import androidx.room.RoomDatabase
     @Database(entities = [FavoriteMovie::class], version = 1)
     abstract class MovieDatabase : RoomDatabase() {
 
-        abstract fun MovieDao() : FavoriteMovieDao
+        abstract fun movieDao() : FavoriteMovieDao
 
         companion object{
             private var INSTANCE : MovieDatabase? = null
