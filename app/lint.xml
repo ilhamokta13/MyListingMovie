@@ -18,4 +18,5 @@
     <issue id="HardcodedText" severity="ignore" />
     <issue id="GradleDependency" severity="ignore"/>
     <issue id="Typo" severity="ignore"/>
+
 </lint>

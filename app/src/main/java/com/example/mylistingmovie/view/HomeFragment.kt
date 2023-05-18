@@ -1,4 +1,4 @@
-@file:Suppress("ReplaceGetOrSet")
+@file:Suppress("ReplaceGetOrSet", "RedundantOverride")
 
 package com.example.mylistingmovie.view
 
@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setVmAdapter()
+
 
     }
     override fun onCreateView(
@@ -66,6 +66,8 @@ class HomeFragment : Fragment() {
         }
 
 //        setUsername()
+
+
     }
 
 //    private fun setUsername() {
@@ -78,7 +80,8 @@ class HomeFragment : Fragment() {
 //
 //    }
 
-    private fun setVmAdapter() {
+    override fun onStart() {
+        super.onStart()
         val viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         viewModel.getlivedatamovie().observe(this) {
             movieadapter = MovieAdapter(it)
@@ -88,9 +91,6 @@ class HomeFragment : Fragment() {
         }
 
         viewModel.getAllMoviesRecom()
-
-
     }
-
 
 }

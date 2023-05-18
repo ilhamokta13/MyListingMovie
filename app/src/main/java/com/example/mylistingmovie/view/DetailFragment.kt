@@ -6,6 +6,7 @@
 package com.example.mylistingmovie.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,8 +18,8 @@ import com.example.mylistingmovie.database.FavoriteMovieDao
 import com.example.mylistingmovie.database.MovieDatabase
 import com.example.mylistingmovie.databinding.FragmentDetailBinding
 import com.example.mylistingmovie.model.Result
-import com.example.mylistingmovie.viewmodel.FavoriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 
@@ -29,9 +30,6 @@ class DetailFragment : Fragment() {
     lateinit var binding : FragmentDetailBinding
     private var moveDao : FavoriteMovieDao?=null
     private var moveDb : MovieDatabase?=null
-    lateinit var viewModel : FavoriteViewModel
-    private var id :Int?=null
-
 
 
     override fun onCreateView(
@@ -44,9 +42,10 @@ class DetailFragment : Fragment() {
 
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        id = arguments?.getInt("id")
+//        id = arguments?.getInt("id")
 
         moveDb= MovieDatabase.getInstance(requireContext())
         moveDao = moveDb?.movieDao()
@@ -54,10 +53,10 @@ class DetailFragment : Fragment() {
         // pengambilan data
         val getData = arguments?.getSerializable("data_movie") as Result?
         val nama = getData!!.title
-        val media = getData!!.mediaType
-        val date = getData!!.releaseDate
-        val sinopsis = getData!!.overview
-        val image = getData!!.backdropPath
+        val media = getData.mediaType
+        val date = getData.releaseDate
+        val sinopsis = getData.overview
+        val image = getData.backdropPath
 
         binding.tvNamafilmdetail.text = nama
         binding.tvMediaTypeDate.text = media
@@ -68,45 +67,35 @@ class DetailFragment : Fragment() {
             .into(binding.ivFilmimagedetail)
 
 
-        binding.toggleFavorit.setOnClickListener {
-            GlobalScope.async {
-                val getfav = arguments?.getSerializable("data_movie") as Result
-                val id = getData!!.id
-                val judul = getData!!.title
-                val ulasan = getData!!.overview
-                val image = getData!!.backdropPath
-                val hasil = moveDb?.movieDao()?.addToFavorit(FavoriteMovie(id, judul,ulasan, image))
+        binding.favoritesBtn.setOnClickListener {
 
+                val getFav = arguments?.getSerializable("data_movie") as Result
+                val judul = getFav.title
+                val ulasan = getFav.overview
+                val gambar = getFav.backdropPath
+
+            GlobalScope.async {
+                val favfilm =  FavoriteMovie(0,judul,ulasan,gambar)
+                val result =moveDb?.movieDao()?.insertFilmFavorites(favfilm)
                 activity?.runOnUiThread {
-                    if (hasil != 0.toLong()){
-                        Toast.makeText(context, "Add to Favorit", Toast.LENGTH_LONG).show()
-                        var _ischecked = false
-                        _ischecked = !_ischecked
-                        binding.toggleFavorit.isChecked = _ischecked
-//                        Navigation.findNavController(it).navigate(R.id.action_detailFragment_to_favoriteFragment)
-                    }else{
-                        Toast.makeText(context, "Failed", Toast.LENGTH_LONG).show()
-                    }
+                    Toast.makeText(context, "Item added to Favorites", Toast.LENGTH_LONG)
+                        .show()
+                    Log.d("tes2", result.toString())
+                    Log.d("tes3", judul)
 
                 }
-
-
-
-
-
-
             }
-
-
-
 
 
         }
 
-    }
+            }
+
+        }
 
 
-}
+
+
 
 
 

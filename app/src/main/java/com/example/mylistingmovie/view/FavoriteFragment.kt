@@ -1,3 +1,5 @@
+@file:Suppress("KotlinDeprecation")
+
 package com.example.mylistingmovie.view
 
 import android.os.Bundle
@@ -9,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mylistingmovie.database.MovieDatabase
 import com.example.mylistingmovie.databinding.FragmentFavoriteBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -35,16 +38,17 @@ class FavoriteFragment : Fragment() {
 
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     private fun getDataFav() {
 
         binding.rvFavMovie.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         GlobalScope.launch {
-            val listdata = mDBnew?.movieDao()!!.getFavoritMovie()
+            val listdata = mDBnew?.movieDao()!!.getAllFilmFavorites()
             activity?.runOnUiThread {
-                listdata.let {
-                    val adapt = FavoritMovieAdapter(it)
-                    binding.rvFavMovie.adapter = adapt
+                listdata.observe(viewLifecycleOwner) {
+                    //set adapter
+                    binding.rvFavMovie.adapter = FavoritMovieAdapter(it)
                 }
             }
         }

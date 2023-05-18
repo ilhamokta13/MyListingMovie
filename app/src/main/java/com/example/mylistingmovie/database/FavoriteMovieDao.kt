@@ -1,19 +1,20 @@
 package com.example.mylistingmovie.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 
 @Dao
 interface FavoriteMovieDao {
-    @Insert
-    fun addToFavorit(favoritMovie : FavoriteMovie):Long
-
     @Query("SELECT * FROM FavoriteMovie")
-    fun getFavoritMovie() : List<FavoriteMovie>
+    fun getAllFilmFavorites() : LiveData<List<FavoriteMovie>>
 
+    @Insert
+    suspend fun insertFilmFavorites(filmFavorites: FavoriteMovie) : Long
 
-    @Query("SELECT count(*) FROM FavoriteMovie WHERE FavoriteMovie.id = :id")
-    fun checkMovie(id: Int) : Int
+    @Delete
+    suspend fun deleteFilmFavorites(filmFavorites: FavoriteMovie) : Int
 
 }

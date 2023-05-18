@@ -8,4 +8,15 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#039BE5</color>
+    <color name="colorPrimary">#7BF6FC</color>
+    <color name="colorPrimaryDark">#0095a8</color>
+    <color name="colorAccent">#2ECADD</color>
+    <color name="textColorPrimary">#403E3E</color>
+    <color name="toolbarIconColor">@color/textColorPrimary</color>
+    <color name="loginPageBackgroundColor">#F5FEFF</color>
+    <color name="cardColor">#8A31334A</color>
+    <color name="hintTextColor">#D2F4F8</color>
+    <color name="textInputOutlineColor">#16FAF3</color>
+    <color name="text">#FFFFFF</color>
+    <color name="login">#708E9394</color>
 </resources>

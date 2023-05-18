@@ -43,6 +43,7 @@ android {
     lint{
         disable 'TyphographyQuotes'
         lintConfig file("lint.xml")
+        disable 'Typo'
     }
 }
 
@@ -97,6 +98,11 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:20.5.0'
     implementation platform('com.google.firebase:firebase-bom:32.0.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
+
+
+    implementation "pl.droidsonroids.gif:android-gif-drawable:1.2.22"
+    api 'com.google.android.material:material:1.1.0-alpha06'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
 
 
