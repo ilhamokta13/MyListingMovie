@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.mylistingmovie.R
 import com.example.mylistingmovie.databinding.FragmentHomeBinding
 import com.example.mylistingmovie.viewmodel.HomeViewModel
@@ -25,7 +25,6 @@ class HomeFragment : Fragment() {
 
     lateinit var binding : FragmentHomeBinding
     private lateinit var movieadapter: MovieAdapter
-//    private lateinit var uservm: UserViewModel
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var pref: SharedPreferences
 
@@ -52,8 +51,6 @@ class HomeFragment : Fragment() {
         pref = requireActivity().getSharedPreferences("Regist", Context.MODE_PRIVATE)
         val fullname = pref.getString("username", "username")
         binding.welcome.text = "Welcome, $fullname!"
-
-//        uservm = ViewModelProvider(this).get(UserViewModel::class.java)
         firebaseAuth = FirebaseAuth.getInstance()
 
         //Profile
@@ -65,27 +62,18 @@ class HomeFragment : Fragment() {
             Navigation.findNavController(binding.root).navigate(R.id.action_homeFragment_to_favoriteFragment)
         }
 
-//        setUsername()
 
 
     }
 
-//    private fun setUsername() {
-//        val currentEmail = firebaseAuth.currentUser!!.email.toString()
-//        uservm.getDataUser(currentEmail)
-//
-//        uservm.getDataUserProfile().observe(viewLifecycleOwner, Observer {
-//            binding.username = it.username
-//        })
-//
-//    }
+
 
     override fun onStart() {
         super.onStart()
         val viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         viewModel.getlivedatamovie().observe(this) {
             movieadapter = MovieAdapter(it)
-            val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            val layoutManager = GridLayoutManager(context,2)
             binding.rvFilm.layoutManager = layoutManager
             binding.rvFilm.adapter = MovieAdapter(it)
         }

@@ -3,6 +3,7 @@
 package com.example.mylistingmovie.view
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -16,7 +17,8 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 
-class FavoritMovieAdapter(private var movefav: List <FavoriteMovie>?) : RecyclerView.Adapter<FavoritMovieAdapter.ViewHolder>() {
+@Suppress("unused")
+class FavoritMovieAdapter(private var context : Context, private var movefav: List <FavoriteMovie>?) : RecyclerView.Adapter<FavoritMovieAdapter.ViewHolder>() {
     private var filmFavDB: MovieDatabase? = null
     class ViewHolder(var binding : ItemFavmovieBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -30,7 +32,7 @@ class FavoritMovieAdapter(private var movefav: List <FavoriteMovie>?) : Recycler
     @OptIn(DelicateCoroutinesApi::class)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.tvNamafilm.text = movefav!![position].title
-        holder.binding.tvOverview.text = movefav!![position].overview
+        holder.binding.tvRelease.text = movefav!![position].release
         Glide.with(holder.itemView)
             .load("https://image.tmdb.org/t/p/w780${movefav!![position].image}")
             .into(holder.binding.ivFilmimage)
@@ -63,6 +65,10 @@ class FavoritMovieAdapter(private var movefav: List <FavoriteMovie>?) : Recycler
                     }
                     .show()
 
+                holder.binding.detailFav.setOnClickListener {
+
+                }
+
             }
         }
 
@@ -72,6 +78,12 @@ class FavoritMovieAdapter(private var movefav: List <FavoriteMovie>?) : Recycler
     override fun getItemCount(): Int {
         return movefav!!.size
     }
+
+    fun setMovie(itemMovie: ArrayList<FavoriteMovie>) {
+        this.movefav = itemMovie
+    }
+
+
 }
 
 

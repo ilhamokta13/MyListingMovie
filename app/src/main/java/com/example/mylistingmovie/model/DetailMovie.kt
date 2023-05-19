@@ -9,8 +9,9 @@ data class DetailMovie(
 
     val image: String,
     val title: String,
-    val media_type: String,
     val date: String,
     val overview: String,
-    val id : String
+    var language : String,
+    var popularity : Double,
+    val id : Int
 ) : Parcelable

@@ -17,6 +17,6 @@
     <!-- Change the severity of hardcoded strings to "error" -->
     <issue id="HardcodedText" severity="ignore" />
     <issue id="GradleDependency" severity="ignore"/>
-    <issue id="Typo" severity="ignore"/>
-
+    <issue id="Overdraw" severity="ignore"/>
+    <issue id="IconLocation" severity="ignore"/>
 </lint>

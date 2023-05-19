@@ -22,7 +22,6 @@ import dagger.hilt.android.AndroidEntryPoint
 open class ProfileFragment : Fragment() {
 
     lateinit var binding: FragmentProfileBinding
-//    private lateinit var uservm: UserViewModel
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var pref : SharedPreferences
 
@@ -40,12 +39,10 @@ open class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        uservm = ViewModelProvider(this).get(UserViewModel::class.java)
 
         firebaseAuth = FirebaseAuth.getInstance()
         pref = requireActivity().getSharedPreferences("Regist", Context.MODE_PRIVATE)
 
-//        setField(firebaseAuth.currentUser?.email!!)
 
 
 
@@ -66,23 +63,6 @@ open class ProfileFragment : Fragment() {
             firebaseAuth.signOut()
             Toast.makeText(context, "Done Update", Toast.LENGTH_SHORT).show()
             Navigation.findNavController(binding.root).navigate(R.id.action_profileFragment_to_homeFragment)
-//            GlobalScope.async {
-//                uservm.updateDataUser(
-//                    User(
-//                    id,
-//                    firebaseAuth.currentUser!!.email.toString(),
-//                    username,
-//                    nama,
-//                    ttl,
-//                    alamat
-//                )
-//                )
-//
-//                uservm.getDataUser(firebaseAuth.currentUser!!.email.toString())
-//            }
-//            findNavController().navigate(R.id.action_profileFragment_to_homeFragment)
-//
-//
         }
 
 

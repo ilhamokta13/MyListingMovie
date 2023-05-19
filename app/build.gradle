@@ -6,6 +6,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -41,9 +42,10 @@ android {
     }
 
     lint{
-        disable 'TyphographyQuotes'
+        disable 'Overdraw'
         lintConfig file("lint.xml")
-        disable 'Typo'
+        disable 'IconLocation'
+
     }
 }
 
@@ -98,6 +100,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:20.5.0'
     implementation platform('com.google.firebase:firebase-bom:32.0.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.7'
 
 
     implementation "pl.droidsonroids.gif:android-gif-drawable:1.2.22"

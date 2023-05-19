@@ -20,7 +20,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     lateinit var binding: FragmentLoginBinding
-//    private lateinit var dataStoreUser: DataStore
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var pref: SharedPreferences
 
@@ -42,29 +41,22 @@ class LoginFragment : Fragment() {
         firebaseAuth = FirebaseAuth.getInstance()
         pref = requireActivity().getSharedPreferences("Regist", Context.MODE_PRIVATE)
 
-//        dataStoreUser = DataStore.getInstance(requireContext().applicationContext)
-//        checkActiveAccount()
 
 
-
-        binding.btnLogin.setOnClickListener {
+        binding.login.setOnClickListener {
             login()
         }
 
-        binding.btnReg.setOnClickListener {
+        binding.register.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_loginFragment_to_registerFragment)
         }
+
+        binding.btnCrash.setOnClickListener {
+            throw RuntimeException("Test Crash") // Force a crash
+        }
     }
 
-//    private fun checkActiveAccount(){
-//        dataStoreUser.statusUser.asLiveData().observe(viewLifecycleOwner, Observer {
-//            Log.d("DS", it.toString())
-//            if(it.toString() == "active"){
-//                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-//            }
-//        })
-//    }
 
     private fun login() {
         val email = binding.emailEditText.text.toString()
@@ -80,32 +72,6 @@ class LoginFragment : Fragment() {
                 }
             }
         }
-
-
-
-
-
-//        if(email.isNotEmpty() && password.isNotEmpty()){
-//            firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
-//                if(it.isSuccessful){
-//
-//                    lifecycleScope.launch {
-//                        dataStoreUser.saveDataUser("active", email)
-//                    }
-//                    Toast.makeText(context, "Berhasil Login", Toast.LENGTH_SHORT).show()
-//
-//                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-//                }else{
-//                    Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//        }else{
-//            Toast.makeText(context, "Data Kurang Lengkap", Toast.LENGTH_SHORT).show()
-//        }
-
-
-
-
 
 
     }

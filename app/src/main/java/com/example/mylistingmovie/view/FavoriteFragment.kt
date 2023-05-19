@@ -7,9 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.mylistingmovie.database.FavoriteMovie
 import com.example.mylistingmovie.database.MovieDatabase
 import com.example.mylistingmovie.databinding.FragmentFavoriteBinding
+import com.example.mylistingmovie.viewmodel.FavoriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
@@ -19,6 +23,8 @@ import kotlinx.coroutines.launch
 class FavoriteFragment : Fragment() {
     lateinit var binding: FragmentFavoriteBinding
     private var mDBnew: MovieDatabase? = null
+    private lateinit var adapter: FavoritMovieAdapter
+    private lateinit var viewmodel : FavoriteViewModel
 
 
     override fun onCreateView(
@@ -33,41 +39,38 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mDBnew = MovieDatabase.getInstance(requireContext())
-        getDataFav()
+        viewmodel = ViewModelProvider(this)[FavoriteViewModel::class.java]
+        //ViewModel
+        adapter = FavoritMovieAdapter(requireActivity(),ArrayList())
+
+        binding.rvFavMovie.layoutManager = GridLayoutManager(context, 2)
+        binding.rvFavMovie.adapter = adapter
+
+        //LiveData
+        viewmodel= ViewModelProvider(this)[FavoriteViewModel::class.java]
+        viewmodel.getliveDataMoviefav().observe(viewLifecycleOwner, Observer {
+            adapter.setMovie(it as ArrayList<FavoriteMovie>)
+        })
+
+
+
 
 
     }
 
     @OptIn(DelicateCoroutinesApi::class)
-    private fun getDataFav() {
-
-        binding.rvFavMovie.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+    override fun onStart() {
+        super.onStart()
         GlobalScope.launch {
-            val listdata = mDBnew?.movieDao()!!.getAllFilmFavorites()
+            val listdata = mDBnew?.movieDao()!!.getFavoritMovie()
             activity?.runOnUiThread {
-                listdata.observe(viewLifecycleOwner) {
-                    //set adapter
-                    binding.rvFavMovie.adapter = FavoritMovieAdapter(it)
-                }
+                adapter = FavoritMovieAdapter(requireActivity(), listdata)
+                binding.rvFavMovie.layoutManager = GridLayoutManager(context, 2)
+                binding.rvFavMovie.adapter = adapter
+
+
             }
         }
-
     }
-
-
-//    fun setVmAdapter() {
-//        val viewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
-//        viewModel.getlivedatamovie().observe(this, Observer {
-//            movieadapterfav = FavoritMovieAdapter(it)
-//            val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-//            binding.rvFavMovie.layoutManager = layoutManager
-//            binding.rvFavMovie.adapter = MovieAdapter(it)
-//        })
-//
-//        viewModel.getAllMoviesRecom()
-//
-//
-//    }
 
 }

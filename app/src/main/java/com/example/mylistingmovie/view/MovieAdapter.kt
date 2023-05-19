@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mylistingmovie.R
 import com.example.mylistingmovie.databinding.ItemMovieBinding
+import com.example.mylistingmovie.model.DetailMovie
 import com.example.mylistingmovie.model.Result
 
 class MovieAdapter (private var listmovie : List<Result>) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
@@ -22,15 +23,25 @@ class MovieAdapter (private var listmovie : List<Result>) : RecyclerView.Adapter
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.binding.tvNamafilm.text = listmovie[position].title
-        holder.binding.tvOverview.text = listmovie[position].overview
+        holder.binding.tvRelease.text = listmovie[position].releaseDate
         Glide.with(holder.itemView)
             .load("https://image.tmdb.org/t/p/w780${listmovie[position].backdropPath}")
             .into(holder.binding.ivFilmimage)
 
-        holder.binding.cardFilm.setOnClickListener {
+        holder.binding.recom.setOnClickListener {
+
+            val image = listmovie[position].backdropPath
+            val title = listmovie[position].title
+            val date = listmovie[position].releaseDate
+            val overview = listmovie[position].overview
+            val language = listmovie[position].originalLanguage
+            val popularity = listmovie[position].popularity
+            val id = listmovie[position].id
+
+            val detail = DetailMovie(image,title, date, overview, language, popularity, id)
 
             val data = Bundle()
-            data.putSerializable("data_movie",listmovie[position])
+            data.putParcelable("data_movie",detail)
             Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_detailFragment,data)
 
         }

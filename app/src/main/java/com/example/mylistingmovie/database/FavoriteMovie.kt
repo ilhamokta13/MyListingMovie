@@ -13,8 +13,8 @@ data class FavoriteMovie(
     val id : Int?,
     @ColumnInfo(name = "title")
     var title : String,
-    @ColumnInfo(name = "overview")
-    var overview: String,
+    @ColumnInfo(name = "release")
+    var release: String,
     @ColumnInfo(name = "image")
     var image : String
 

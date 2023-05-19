@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.mylistingmovie.R
 import com.example.mylistingmovie.databinding.FragmentRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -20,8 +21,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class RegisterFragment : Fragment() {
 
     lateinit var binding:FragmentRegisterBinding
-//    private lateinit var uservm: UserViewModel
-//    private lateinit var userdb: UserDatabase
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var pref: SharedPreferences
 
@@ -41,14 +40,12 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         firebaseAuth = FirebaseAuth.getInstance()
         pref = requireActivity().getSharedPreferences("Regist", Context.MODE_PRIVATE)
-//        uservm = ViewModelProvider(this).get(UserViewModel::class.java)
-//        userdb = UserDatabase.getDatabase(requireContext())
-
         binding.btnRegister.setOnClickListener {
-
             register()
 
         }
+
+
 
     }
 
@@ -81,45 +78,6 @@ class RegisterFragment : Fragment() {
             Toast.makeText(context, "Maaf Data Belum Lengkap", Toast.LENGTH_SHORT).show()
         }
     }
-
-
-//            if(pass == confirmpass){
-//                firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
-//                    if(it.isSuccessful){
-//                        val getUserAuth = Firebase.auth.currentUser
-//                        getUserAuth?.let {it_auth->
-//                            insertDataUser(username, it_auth.email!!)
-//                        }
-//                        Toast.makeText(context, "Registrasi Berhasil", Toast.LENGTH_LONG).show()
-//
-//                        findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
-//                    }else{
-//                        Toast.makeText(context, it.exception.toString(), Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//            }else{
-//                Toast.makeText(context, "Password Tidak Sesuai", Toast.LENGTH_SHORT).show()
-//            }
-//        }else{
-//            Toast.makeText(context,"Data Anda Kurang Lengkap", Toast.LENGTH_SHORT).show()
-//        }
-
-
-//    private fun insertDataUser(username: String, email: String) {
-//        GlobalScope.async {
-//            uservm.insertDataUser(
-//                User(
-//                    0,
-//                    email,
-//                    username,
-//                    null,
-//                    null,
-//                    null
-//                )
-//            )
-//        }
-//
-//
    }
 
 

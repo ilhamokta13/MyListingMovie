@@ -6,18 +6,19 @@
 package com.example.mylistingmovie.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.mylistingmovie.database.FavoriteMovie
 import com.example.mylistingmovie.database.FavoriteMovieDao
 import com.example.mylistingmovie.database.MovieDatabase
 import com.example.mylistingmovie.databinding.FragmentDetailBinding
-import com.example.mylistingmovie.model.Result
+import com.example.mylistingmovie.model.DetailMovie
+import com.example.mylistingmovie.viewmodel.FavoriteViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
@@ -27,9 +28,10 @@ import kotlinx.coroutines.async
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
 
-    lateinit var binding : FragmentDetailBinding
-    private var moveDao : FavoriteMovieDao?=null
-    private var moveDb : MovieDatabase?=null
+    lateinit var binding: FragmentDetailBinding
+    private var moveDao: FavoriteMovieDao? = null
+    private var moveDb: MovieDatabase? = null
+    private lateinit var viewmodel: FavoriteViewModel
 
 
     override fun onCreateView(
@@ -46,52 +48,65 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        id = arguments?.getInt("id")
+        viewmodel = ViewModelProvider(this)[FavoriteViewModel::class.java]
 
-        moveDb= MovieDatabase.getInstance(requireContext())
+        moveDb = MovieDatabase.getInstance(requireContext())
         moveDao = moveDb?.movieDao()
 
         // pengambilan data
-        val getData = arguments?.getSerializable("data_movie") as Result?
-        val nama = getData!!.title
-        val media = getData.mediaType
-        val date = getData.releaseDate
+        val getData = arguments?.getParcelable<DetailMovie>("data_movie") as DetailMovie
+        val nama = getData.title
+        val date = getData.date
         val sinopsis = getData.overview
-        val image = getData.backdropPath
+        val language = getData.language
+        val image = getData.image
+        val popularity = getData.popularity
+
 
         binding.tvNamafilmdetail.text = nama
-        binding.tvMediaTypeDate.text = media
         binding.tvDate.text = date
         binding.tvSinopsisfilmdetail.text = sinopsis
+        binding.tvLanguage.text = language
+        binding.tvPopularity.text = popularity.toString()
 
         Glide.with(view.context).load("https://image.tmdb.org/t/p/w780${image}")
             .into(binding.ivFilmimagedetail)
 
 
-        binding.favoritesBtn.setOnClickListener {
-
-                val getFav = arguments?.getSerializable("data_movie") as Result
-                val judul = getFav.title
-                val ulasan = getFav.overview
-                val gambar = getFav.backdropPath
-
+        binding.toggleFavorit.setOnClickListener {
             GlobalScope.async {
-                val favfilm =  FavoriteMovie(0,judul,ulasan,gambar)
-                val result =moveDb?.movieDao()?.insertFilmFavorites(favfilm)
+                val getFav = arguments?.getParcelable<DetailMovie>("data_movie") as DetailMovie
+                val idd = getFav.id
+                val judul = getFav.title
+                val release = getFav.date
+                val gambar = getFav.image
+                val hasil = moveDb?.movieDao()?.addToFavorit(FavoriteMovie(idd, judul, release, gambar))
+
                 activity?.runOnUiThread {
-                    Toast.makeText(context, "Item added to Favorites", Toast.LENGTH_LONG)
-                        .show()
-                    Log.d("tes2", result.toString())
-                    Log.d("tes3", judul)
+                    if (hasil != 0.toLong()){
+                        Toast.makeText(context, "Add to Favorit", Toast.LENGTH_LONG).show()
+                        var _isChecked = false
+                        _isChecked = !_isChecked
+                        binding.toggleFavorit.isChecked = _isChecked
 
+                    }else{
+                        Toast.makeText(context, "Failed", Toast.LENGTH_LONG).show()
+                    }
                 }
+
+
+            }
+
+
             }
 
 
         }
 
-            }
+    }
 
-        }
+
+
 
 
 
