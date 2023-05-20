@@ -22,6 +22,7 @@ class MovieAdapter (private var listmovie : List<Result>) : RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+
         holder.binding.tvNamafilm.text = listmovie[position].title
         holder.binding.tvRelease.text = listmovie[position].releaseDate
         Glide.with(holder.itemView)

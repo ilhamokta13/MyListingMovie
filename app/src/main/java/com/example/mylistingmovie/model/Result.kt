@@ -38,5 +38,5 @@ data class Result(
     val mediaType: String,
     @SerializedName("vote_count")
     val voteCount: Int
-): Serializable
+):Serializable
 

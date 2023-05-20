@@ -16,6 +16,13 @@ data class FavoriteMovie(
     @ColumnInfo(name = "release")
     var release: String,
     @ColumnInfo(name = "image")
-    var image : String
+    var image : String,
+    @ColumnInfo(name = "overview")
+    var overview: String,
+    @ColumnInfo(name = "language")
+    var language: String,
+    @ColumnInfo(name = "popularity")
+    var popularity: String,
+
 
 ):Parcelable

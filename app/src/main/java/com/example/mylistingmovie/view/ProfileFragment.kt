@@ -43,6 +43,18 @@ open class ProfileFragment : Fragment() {
         firebaseAuth = FirebaseAuth.getInstance()
         pref = requireActivity().getSharedPreferences("Regist", Context.MODE_PRIVATE)
 
+        val getUser = pref.getString("username", "")
+        binding.usernameUpText.setText(getUser)
+
+        val getNama = pref.getString("nama", "")
+        binding.namaUpText.setText(getNama)
+
+        val getTgl = pref.getString("tgl", "")
+        binding.tanggalUpText.setText(getTgl)
+
+        val getAlamat = pref.getString("alamat", "")
+        binding.alamatUpText.setText(getAlamat)
+
 
 
 
@@ -67,6 +79,13 @@ open class ProfileFragment : Fragment() {
 
 
             binding.btnLogout.setOnClickListener {
+                firebaseAuth = FirebaseAuth.getInstance()
+                firebaseAuth.signOut()
+                val addUser = pref.edit()
+                addUser.remove("nama")
+                addUser.remove("tgl")
+                addUser.remove("alamat")
+                addUser.apply()
                 Toast.makeText(activity, "user berhasil logout", Toast.LENGTH_LONG).show()
                 Navigation.findNavController(binding.root)
                     .navigate(R.id.action_profileFragment_to_loginFragment)

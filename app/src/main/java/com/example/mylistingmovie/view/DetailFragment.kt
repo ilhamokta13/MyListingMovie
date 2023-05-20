@@ -24,7 +24,7 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION", "NAME_SHADOWING")
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
 
@@ -32,6 +32,8 @@ class DetailFragment : Fragment() {
     private var moveDao: FavoriteMovieDao? = null
     private var moveDb: MovieDatabase? = null
     private lateinit var viewmodel: FavoriteViewModel
+    private var id :Int?=null
+
 
 
     override fun onCreateView(
@@ -47,13 +49,15 @@ class DetailFragment : Fragment() {
     @OptIn(DelicateCoroutinesApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        id = arguments?.getInt("id")
+
+
         viewmodel = ViewModelProvider(this)[FavoriteViewModel::class.java]
 
         moveDb = MovieDatabase.getInstance(requireContext())
         moveDao = moveDb?.movieDao()
 
         // pengambilan data
+        id = arguments?.getInt("id")
         val getData = arguments?.getParcelable<DetailMovie>("data_movie") as DetailMovie
         val nama = getData.title
         val date = getData.date
@@ -61,6 +65,7 @@ class DetailFragment : Fragment() {
         val language = getData.language
         val image = getData.image
         val popularity = getData.popularity
+
 
 
         binding.tvNamafilmdetail.text = nama
@@ -80,7 +85,10 @@ class DetailFragment : Fragment() {
                 val judul = getFav.title
                 val release = getFav.date
                 val gambar = getFav.image
-                val hasil = moveDb?.movieDao()?.addToFavorit(FavoriteMovie(idd, judul, release, gambar))
+                val overview = getFav.overview
+                val language = getFav.language
+                val popular = getFav.popularity.toString()
+                val hasil = moveDb?.movieDao()?.addToFavorit(FavoriteMovie(idd, judul, release, gambar,overview,language,popular))
 
                 activity?.runOnUiThread {
                     if (hasil != 0.toLong()){
