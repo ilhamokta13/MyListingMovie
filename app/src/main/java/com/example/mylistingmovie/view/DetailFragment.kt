@@ -50,7 +50,6 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         viewmodel = ViewModelProvider(this)[FavoriteViewModel::class.java]
 
         moveDb = MovieDatabase.getInstance(requireContext())
