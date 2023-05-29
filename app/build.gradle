@@ -22,6 +22,22 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    flavorDimensions("movie")
+
+    productFlavors{
+
+
+
+
+        loginblue{
+            applicationIdSuffix ".loginblue"
+            dimension "movie"
+        }
+
+
+    }
+
+
     buildTypes {
         release {
             minifyEnabled false
