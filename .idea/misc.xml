@@ -3,6 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/KULIAH/MyListingMovie/app/src/loginblue/res/layout/activity_main.xml" value="0.14130434782608695" />
+        <entry key="..\:/KULIAH/MyListingMovie/app/src/loginblue/res/layout/fragment_login.xml" value="0.22" />
+        <entry key="..\:/KULIAH/MyListingMovie/app/src/logindark/res/layout/activity_main.xml" value="0.14130434782608695" />
+        <entry key="..\:/KULIAH/MyListingMovie/app/src/logindark/res/layout/fragment_detail.xml" value="0.14130434782608695" />
+        <entry key="..\:/KULIAH/MyListingMovie/app/src/logindark/res/layout/fragment_login.xml" value="0.14130434782608695" />
+        <entry key="..\:/KULIAH/MyListingMovie/app/src/loginwhite/res/layout/activity_main.xml" value="0.14130434782608695" />
+        <entry key="..\:/KULIAH/MyListingMovie/app/src/loginwhite/res/layout/fragment_login.xml" value="0.14130434782608695" />
         <entry key="..\:/KULIAH/MyListingMovie/app/src/main/res/drawable-v24/ic_baseline_account_box_24.xml" value="0.1" />
         <entry key="..\:/KULIAH/MyListingMovie/app/src/main/res/drawable-v24/ic_baseline_account_circle_24.xml" value="0.1" />
         <entry key="..\:/KULIAH/MyListingMovie/app/src/main/res/drawable-v24/ic_baseline_person_24.xml" value="0.1" />
