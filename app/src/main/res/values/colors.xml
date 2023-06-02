@@ -10,4 +10,5 @@
     <color name="blue">#039BE5</color>
     <color name="cardColor">#8A31334A</color>
     <color name="login">#708E9394</color>
+    <color name="primary">#013674</color>
 </resources>

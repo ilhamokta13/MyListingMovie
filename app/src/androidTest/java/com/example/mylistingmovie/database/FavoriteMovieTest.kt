@@ -13,10 +13,10 @@ class FavoriteMovieTest{
         // Persiapan sebelum setiap pengujian dilakukan
         movieFavorit = FavoriteMovie(
             id = 1,
-            title = "The Movie",
-            release = "2023-05-31",
+            title = "Hey Tayo",
+            release = "2017-05-31",
             image = "https://example.com/movie.jpg",
-            overview = "This is a great movie!",
+            overview = "Movie The Best",
             language = "ind",
             popularity = "3"
         )
@@ -31,10 +31,10 @@ class FavoriteMovieTest{
     fun testMovieFavorit() {
         // Memeriksa apakah nilai yang diatur sesuai dengan yang diharapkan
         assertEquals(1, movieFavorit.id)
-        assertEquals("The Movie", movieFavorit.title)
-        assertEquals("2023-05-31", movieFavorit.release)
+        assertEquals("Hey Tayo", movieFavorit.title)
+        assertEquals("2017-05-31", movieFavorit.release)
         assertEquals("https://example.com/movie.jpg", movieFavorit.image)
-        assertEquals("This is a great movie!", movieFavorit.overview)
+        assertEquals("Movie The Best", movieFavorit.overview)
         assertEquals("ind", movieFavorit.language)
         assertEquals("3", movieFavorit.popularity)
     }
