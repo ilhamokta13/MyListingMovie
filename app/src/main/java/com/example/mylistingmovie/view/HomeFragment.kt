@@ -24,16 +24,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     lateinit var binding : FragmentHomeBinding
-    private lateinit var movieadapter: MovieAdapter
-    private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var pref: SharedPreferences
+     lateinit var movieadapter: MovieAdapter
+    lateinit var firebaseAuth: FirebaseAuth
+     lateinit var pref: SharedPreferences
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

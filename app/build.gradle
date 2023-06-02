@@ -7,6 +7,7 @@ plugins {
     id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -31,9 +32,15 @@ android {
             dimension "movie"
         }
 
+        logindark{
+            applicationIdSuffix ".logindark"
+            dimension "movie"
+        }
 
-
-
+        loginwhite{
+            applicationIdSuffix ".loginwhite"
+            dimension "movie"
+        }
 
 
     }
@@ -68,6 +75,30 @@ android {
 
 //noinspection SpellCheckingInspection
 dependencies {
+    //mockito
+    //mockito
+    testImplementation 'org.mockito:mockito-core:3.12.4'
+    testImplementation 'org.mockito:mockito-inline:3.12.4'
+    testImplementation "androidx.arch.core:core-testing:2.1.0" // InstantTaskExecutorRule
+    testImplementation "androidx.arch.core:core-testing:2.1.0" // InstantTaskExecutorRule
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0"
+
+    //special testing
+    testImplementation "androidx.arch.core:core-testing:2.1.0" // InstantTaskExecutorRule
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.1" //TestDispatcher
+
+
+    // Dependensi untuk testing
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("org.mockito:mockito-core:3.11.2")
+
+
+
+
+
+    //special instrumentation testing
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0" // InstantTaskExecutorRule
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4" //TestDispatcher
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -79,6 +110,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    // Fragment testing dependencies
+    debugImplementation 'androidx.fragment:fragment-testing:1.4.0'
 
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.7'
@@ -121,6 +154,10 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:32.0.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.7'
+
+    // Add Robolectric as a test implementation
+    testImplementation 'org.robolectric:robolectric:4.6.1'
+
 
 
     implementation "pl.droidsonroids.gif:android-gif-drawable:1.2.22"

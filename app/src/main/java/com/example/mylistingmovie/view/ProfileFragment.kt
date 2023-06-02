@@ -19,13 +19,11 @@ import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-open class ProfileFragment : Fragment() {
+ class ProfileFragment : Fragment() {
 
     lateinit var binding: FragmentProfileBinding
-    private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var pref : SharedPreferences
-
-
+     lateinit var firebaseAuth: FirebaseAuth
+     lateinit var pref : SharedPreferences
 
 
     override fun onCreateView(

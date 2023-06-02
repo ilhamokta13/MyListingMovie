@@ -20,8 +20,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     lateinit var binding: FragmentLoginBinding
-    private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var pref: SharedPreferences
+    lateinit var firebaseAuth: FirebaseAuth
+    lateinit var pref: SharedPreferences
 
 
     override fun onCreateView(
@@ -58,7 +58,7 @@ class LoginFragment : Fragment() {
     }
 
 
-    private fun login() {
+    fun login() {
         val email = binding.emailEditText.text.toString()
         val password = binding.passEditText.text.toString()
 

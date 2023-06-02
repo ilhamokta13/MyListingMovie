@@ -14,9 +14,7 @@ import org.junit.Test
 import retrofit2.Call
 
 class HomeViewModelTest{
-
     lateinit var service : RestfulApi
-
     @Before
     fun setup(){
         //fungsi mock() untuk membuat objek palsu (mock) dari kelas yang ingin kita uji - RestfulApi

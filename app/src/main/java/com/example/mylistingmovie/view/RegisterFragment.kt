@@ -21,8 +21,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class RegisterFragment : Fragment() {
 
     lateinit var binding:FragmentRegisterBinding
-    private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var pref: SharedPreferences
+    lateinit var firebaseAuth: FirebaseAuth
+    lateinit var pref: SharedPreferences
 
 
     override fun onCreateView(
@@ -49,7 +49,7 @@ class RegisterFragment : Fragment() {
 
     }
 
-    private fun register() {
+    fun register() {
         val username = binding.usernameEditText.text.toString()
         val email = binding.emailEditText.text.toString()
         val pass = binding.passEditText.text.toString()

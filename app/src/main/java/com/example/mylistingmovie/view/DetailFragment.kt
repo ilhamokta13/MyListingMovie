@@ -29,10 +29,10 @@ import kotlinx.coroutines.async
 class DetailFragment : Fragment() {
 
     lateinit var binding: FragmentDetailBinding
-    private var moveDao: FavoriteMovieDao? = null
-    private var moveDb: MovieDatabase? = null
-    private lateinit var viewmodel: FavoriteViewModel
-    private var id :Int?=null
+     var moveDao: FavoriteMovieDao? = null
+    var moveDb: MovieDatabase? = null
+    lateinit var viewmodel: FavoriteViewModel
+    var id :Int?=null
 
 
 
